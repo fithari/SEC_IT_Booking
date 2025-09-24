@@ -5,20 +5,20 @@ import { TechnicianStatusProps } from "@/types";
 
 export function TechnicianStatus({ technicians, responseTime, status }: TechnicianStatusProps) {
     return (
-      <div className="bg-gradient-to-br from-gray-50 via-white to-gray-100 p-8 rounded-2xl shadow-xl border border-gray-200 my-6 mx-5">
+      <div className="bg-gradient-to-br from-gray-50 via-white to-gray-100 p-4 rounded-2xl shadow-xl border border-gray-200 my-6 mx-5">
         <h3 className="text-2xl font-bold mb-6 flex items-center">
           📅 Technician Availability
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="flex flex-col gap-3">
           {technicians.map((tech, index) => (
             <div
               key={index}
-              className={`flex flex-col items-center justify-center p-4 rounded-xl shadow-md hover:shadow-xl transition ${
-                tech.available ? "bg-green-50" : "bg-red-50"
+              className={`flex flex-row items-center justify-start p-2 rounded-xl border ${
+                tech.available ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"
               }`}
             >
-              <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-md mb-3">
+              <div className="w-16 h-16 overflow-hidden border-2 border-gray-300 shadow-md mr-3 flex-shrink-0 rounded-lg">
                 {tech.image ? (
                   <Image
                     src={tech.image}
@@ -33,24 +33,18 @@ export function TechnicianStatus({ technicians, responseTime, status }: Technici
                   </div>
                 )}
               </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-1">
-                  <span
-                    className={`w-2.5 h-2.5 rounded-full mr-2 ${
-                      tech.available ? "bg-green-500" : "bg-red-500"
-                    }`}
-                  />
-                  <strong className="text-base">{tech.name}</strong>
-                </div>
+              <div className="flex flex-col">
+                <strong className="text-base">{tech.name}</strong>
                 <p className="text-xs text-gray-700">{tech.currentStatus}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-8 bg-blue-50 p-5 rounded-xl shadow-inner text-center">
-          <strong className="text-gray-900">Estimated Response Time:</strong>{" "}
-          <span className="text-gray-700">{responseTime}</span>
+        <div className="mt-4 flex justify-center">
+          <span className="inline-block px-4 py-2 rounded-lg bg-blue-100 text-blue-800 font-medium">
+            ⏱ Estimated Wait: {responseTime}
+          </span>
         </div>
       </div>
     );

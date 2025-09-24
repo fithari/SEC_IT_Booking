@@ -81,21 +81,28 @@ export function SupportForm({ technicians, responseTime }: SupportFormProps) {
     return (
         <form onSubmit={handleSubmit} className="p-6 space-y-6 text-black">
             <div className="space-y-4">
+                {/* Move LocationSelector and PrioritySelector to the top */}
+                <LocationSelector value={formData.serviceLocation} onChange={(value) => setFormData((prev) => ({ ...prev, serviceLocation: value }))} />
+                <PrioritySelector value={formData.priority} onChange={(value) => setFormData((prev) => ({ ...prev, priority: value }))} />
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="form-group">
-                        <label htmlFor="location" className="block text-sm font-medium text-black mb-1">
-                            Location
-                        </label>
-                        <input
-                            type="text"
-                            id="location"
-                            name="location"
-                            value={formData.location}
-                            onChange={handleInputChange}
-                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            required
-                        />
-                    </div>
+                    {/* Conditionally render location input only when 'come-to-me' is selected */}
+                    {formData.serviceLocation === "come-to-me" && (
+                        <div className="form-group">
+                            <label htmlFor="location" className="block text-sm font-medium text-black mb-1">
+                                Location
+                            </label>
+                            <input
+                                type="text"
+                                id="location"
+                                name="location"
+                                value={formData.location}
+                                onChange={handleInputChange}
+                                className="w-full px-3 py-2 rounded-md bg-gray-100 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                required
+                            />
+                        </div>
+                    )}
 
                     <div className="form-group">
                         <label htmlFor="name" className="block text-sm font-medium text-black mb-1">
@@ -107,7 +114,7 @@ export function SupportForm({ technicians, responseTime }: SupportFormProps) {
                             name="name"
                             value={formData.name}
                             onChange={handleInputChange}
-                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full px-3 py-2 rounded-md bg-gray-100 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                             required
                         />
                     </div>
@@ -124,7 +131,7 @@ export function SupportForm({ technicians, responseTime }: SupportFormProps) {
                             name="email"
                             value={formData.email}
                             onChange={handleInputChange}
-                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full px-3 py-2 rounded-md bg-gray-100 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                             required
                         />
                     </div>
@@ -139,16 +146,23 @@ export function SupportForm({ technicians, responseTime }: SupportFormProps) {
                             name="phone"
                             value={formData.phone}
                             onChange={handleInputChange}
-                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full px-3 py-2 rounded-md bg-gray-100 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         />
                     </div>
                 </div>
 
-                <div className="form-group">
+                <div className="form-group w-full">
                     <label htmlFor="category" className="block text-sm font-medium text-black mb-1">
                         Issue Category
                     </label>
-                    <select id="category" name="category" value={formData.category} onChange={handleInputChange} className="w-full p-2 border rounded-md" required>
+                    <select
+                        id="category"
+                        name="category"
+                        value={formData.category}
+                        onChange={handleInputChange}
+                        className="block w-full px-3 py-2 rounded-md bg-gray-100 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none sm:text-sm"
+                        required
+                    >
                         <option value="">Select a category...</option>
                         <option value="computer">Computer/Laptop Issues</option>
                         <option value="printer">Printer Problems</option>
@@ -160,9 +174,6 @@ export function SupportForm({ technicians, responseTime }: SupportFormProps) {
                     </select>
                 </div>
 
-                <LocationSelector value={formData.serviceLocation} onChange={(value) => setFormData((prev) => ({ ...prev, serviceLocation: value }))} />
-
-                <PrioritySelector value={formData.priority} onChange={(value) => setFormData((prev) => ({ ...prev, priority: value }))} />
 
                 <div className="form-group">
                     <label htmlFor="description" className="block text-sm font-medium text-black mb-1">
@@ -173,7 +184,7 @@ export function SupportForm({ technicians, responseTime }: SupportFormProps) {
                         name="description"
                         value={formData.description}
                         onChange={handleInputChange}
-                        className="w-full p-2 border rounded-md min-h-[100px] focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full px-3 py-2 rounded-md bg-gray-100 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none min-h-[100px]"
                         placeholder="Please provide as much detail as possible about the issue..."
                         required
                     />

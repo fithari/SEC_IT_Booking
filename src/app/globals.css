@@ -3,6 +3,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-geist: 'Geist', sans-serif;
+  --priority-low: #22c55e;     /* green-500 */
+  --priority-normal: #f59e0b;  /* amber-500 */
+  --priority-high: #ef4444;    /* red-500 */
 }
 
 @theme inline {
@@ -22,5 +26,27 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist);
+}
+
+@media (max-width: 640px) {
+  .max-w-2xl {
+    margin: 0.5rem;
+  }
+  
+  .p-8 {
+    padding: 1rem;
+  }
+  
+  .w-24 {
+    width: 3rem;
+  }
+  
+  .h-24 {
+    height: 3rem;
+  }
+  
+  .text-3xl {
+    font-size: 1.5rem;
+  }
 }
