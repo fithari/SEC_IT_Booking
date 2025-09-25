@@ -34,3 +34,45 @@ export interface AutotaskTicket {
     ticketNumber: string;
     error?: string;
 }
+
+export interface ScheduleItem {
+    start: { dateTime: string; timeZone?: string };
+    end: { dateTime: string; timeZone?: string };
+    subject?: string;
+    status?: string;
+}
+
+export interface Schedule {
+    scheduleId: string;
+    availabilityView: string;
+    scheduleItems: ScheduleItem[];
+}
+
+export interface AvailabilityResponse {
+    value: Schedule[];
+    mock?: boolean;
+}
+
+export interface EventResponse {
+    id: string;
+    subject: string;
+    start: { dateTime: string; timeZone: string };
+    end: { dateTime: string; timeZone: string };
+    body?: { contentType: string; content: string };
+}
+
+export interface BookingRequest {
+    technicianEmail: string;
+    subject: string;
+    start: string;
+    end: string;
+    bodyContent: string;
+    priority: "high" | "normal" | "low";
+    category: string;
+}
+
+export interface SlotResult {
+    technicianEmail: string;
+    slotStart: Date;
+    slotEnd: Date;
+}
